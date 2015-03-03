@@ -46,7 +46,7 @@ define('lang_Size','Gr&ouml;&szlig;e');
 define('lang_Date','Datum');
 define('lang_Operations','Aktionen');
 define('lang_Filename','Dateiname');
-define('lang_Date_type','d.m.Y');	//y-m-d
+define('lang_Date_type','d.m.Y');    //y-m-d
 define('lang_OK','OK');
 define('lang_Cancel','Abbrechen');
 define('lang_Sorting','sorting');
@@ -55,4 +55,3 @@ define('lang_Extract','extract here');
 define('lang_File_info','file info');
 define('lang_Edit_image','edit image');
 define('lang_Duplicate','Duplicate');
-?>

@@ -3,7 +3,6 @@ include('config/config.php');
 if($_SESSION["verify"] != "RESPONSIVEfilemanager") die('forbiden');
 include('include/utils.php');
 
-
 $thumb_pos=strpos($_POST['path_thumb'],$thumbs_base_path);
 if($thumb_pos !=0
     || strpos($_POST['path_thumb'],'../',strlen($thumbs_base_path)+$thumb_pos)!==FALSE
@@ -12,10 +11,10 @@ if($thumb_pos !=0
     || strpos($_POST['path'],'./')===0)
     die('wrong path');
 
-$language_file = 'lang/en_EN.php'; 
+$language_file = 'lang/en_EN.php';
 if (isset($_GET['lang']) && $_GET['lang'] != 'undefined' && $_GET['lang']!='') {
     $path_parts = pathinfo($_GET['lang']);
-    if(is_readable('lang/' .$path_parts['basename']. '.php')){ 
+    if(is_readable('lang/' .$path_parts['basename']. '.php')){
         $language_file = 'lang/' .$path_parts['basename']. '.php';
     }
 }
@@ -31,8 +30,8 @@ while($cycle && $i<$max_cycles){
     if($path==$base)  $cycle=false;
     
     if(file_exists($path."config.php")){
-	require_once($path."config.php");
-	$cycle=false;
+    require_once($path."config.php");
+    $cycle=false;
     }
     $path=fix_dirname($path)."/";
     $cycle=false;
@@ -58,43 +57,43 @@ if(isset($_GET['action'])){
                 unlink($path);
                 if(file_exists($path_thumb))
                     unlink($path_thumb);
-		    
-		$info=pathinfo($path);
-		if($relative_image_creation){
-		    foreach($relative_path_from_current_pos as $k=>$path){
-			if($path!="" && $path[strlen($path)-1]!="/") $path.="/";
-			if(file_exists($info['dirname']."/".$path.$relative_image_creation_name_to_prepend[$k].$info['filename'].$relative_image_creation_name_to_append[$k].".".$info['extension'])){
-			    unlink($info['dirname']."/".$path.$relative_image_creation_name_to_prepend[$k].$info['filename'].$relative_image_creation_name_to_append[$k].".".$info['extension']);
-			}
-		    }
-		}
-		
-		if($fixed_image_creation){
-		    foreach($fixed_path_from_filemanager as $k=>$path){
-			if($path!="" && $path[strlen($path)-1]!="/") $path.="/";
-			$base_dir=$path.substr_replace($info['dirname']."/", '', 0, strlen($current_path));
-			if(file_exists($base_dir.$fixed_image_creation_name_to_prepend[$k].$info['filename'].$fixed_image_creation_to_append[$k].".".$info['extension'])){
-			    unlink($base_dir.$fixed_image_creation_name_to_prepend[$k].$info['filename'].$fixed_image_creation_to_append[$k].".".$info['extension']);
-			}
-		    }
-		}
+            
+        $info=pathinfo($path);
+        if($relative_image_creation){
+            foreach($relative_path_from_current_pos as $k=>$path){
+            if($path!="" && $path[strlen($path)-1]!="/") $path.="/";
+            if(file_exists($info['dirname']."/".$path.$relative_image_creation_name_to_prepend[$k].$info['filename'].$relative_image_creation_name_to_append[$k].".".$info['extension'])){
+                unlink($info['dirname']."/".$path.$relative_image_creation_name_to_prepend[$k].$info['filename'].$relative_image_creation_name_to_append[$k].".".$info['extension']);
+            }
+            }
+        }
+        
+        if($fixed_image_creation){
+            foreach($fixed_path_from_filemanager as $k=>$path){
+            if($path!="" && $path[strlen($path)-1]!="/") $path.="/";
+            $base_dir=$path.substr_replace($info['dirname']."/", '', 0, strlen($current_path));
+            if(file_exists($base_dir.$fixed_image_creation_name_to_prepend[$k].$info['filename'].$fixed_image_creation_to_append[$k].".".$info['extension'])){
+                unlink($base_dir.$fixed_image_creation_name_to_prepend[$k].$info['filename'].$fixed_image_creation_to_append[$k].".".$info['extension']);
+            }
+            }
+        }
             }
             break;
         case 'delete_folder':
             if($delete_folders){
-		if(is_dir($path_thumb))
-		    deleteDir($path_thumb);
-		if(is_dir($path)){
-		    deleteDir($path);	
-		    if($fixed_image_creation){
-			foreach($fixed_path_from_filemanager as $k=>$paths){
-			    if($paths!="" && $paths[strlen($paths)-1]!="/") $paths.="/";
-			    $base_dir=$paths.substr_replace($path, '', 0, strlen($current_path));
-			    if(is_dir($base_dir))
-				deleteDir($base_dir);
-			}
-		    }
-		}
+        if(is_dir($path_thumb))
+            deleteDir($path_thumb);
+        if(is_dir($path)){
+            deleteDir($path);
+            if($fixed_image_creation){
+            foreach($fixed_path_from_filemanager as $k=>$paths){
+                if($paths!="" && $paths[strlen($paths)-1]!="/") $paths.="/";
+                $base_dir=$paths.substr_replace($path, '', 0, strlen($current_path));
+                if(is_dir($base_dir))
+                deleteDir($base_dir);
+            }
+            }
+        }
             }
             break;
         case 'create_folder':
@@ -105,18 +104,18 @@ if(isset($_GET['action'])){
         case 'rename_folder':
             if($rename_folders){
                 $name=fix_filename($name);
-		$name=str_replace('.','',$name);
+        $name=str_replace('.','',$name);
                 if(!empty($name)){
                     if(!rename_folder($path,$name))
                         die(lang_Rename_existing_folder);
                     rename_folder($path_thumb,$name);
-		    if($fixed_image_creation){
-			foreach($fixed_path_from_filemanager as $k=>$paths){
-			    if($paths!="" && $paths[strlen($paths)-1]!="/") $paths.="/";
-			    $base_dir=$paths.substr_replace($path, '', 0, strlen($current_path));
-			    rename_folder($base_dir,$name);
-			}
-		    }
+            if($fixed_image_creation){
+            foreach($fixed_path_from_filemanager as $k=>$paths){
+                if($paths!="" && $paths[strlen($paths)-1]!="/") $paths.="/";
+                $base_dir=$paths.substr_replace($path, '', 0, strlen($current_path));
+                rename_folder($base_dir,$name);
+            }
+            }
                 }else{
                     die(lang_Empty_name);
                 }
@@ -129,38 +128,38 @@ if(isset($_GET['action'])){
                     if(!rename_file($path,$name))
                         die(lang_Rename_existing_file);
                     rename_file($path_thumb,$name);
-		    if($fixed_image_creation){
-			$info=pathinfo($path);
-			foreach($fixed_path_from_filemanager as $k=>$paths){
-			    if($paths!="" && $paths[strlen($paths)-1]!="/") $paths.="/";
-			    $base_dir=$paths.substr_replace($info['dirname']."/", '', 0, strlen($current_path));
-			    if(file_exists($base_dir.$fixed_image_creation_name_to_prepend[$k].$info['filename'].$fixed_image_creation_to_append[$k].".".$info['extension'])){
-				rename_file($base_dir.$fixed_image_creation_name_to_prepend[$k].$info['filename'].$fixed_image_creation_to_append[$k].".".$info['extension'],$fixed_image_creation_name_to_prepend[$k].$name.$fixed_image_creation_to_append[$k]);
-			    }
-			}
-		    }
+            if($fixed_image_creation){
+            $info=pathinfo($path);
+            foreach($fixed_path_from_filemanager as $k=>$paths){
+                if($paths!="" && $paths[strlen($paths)-1]!="/") $paths.="/";
+                $base_dir=$paths.substr_replace($info['dirname']."/", '', 0, strlen($current_path));
+                if(file_exists($base_dir.$fixed_image_creation_name_to_prepend[$k].$info['filename'].$fixed_image_creation_to_append[$k].".".$info['extension'])){
+                rename_file($base_dir.$fixed_image_creation_name_to_prepend[$k].$info['filename'].$fixed_image_creation_to_append[$k].".".$info['extension'],$fixed_image_creation_name_to_prepend[$k].$name.$fixed_image_creation_to_append[$k]);
+                }
+            }
+            }
                 }else{
                     die(lang_Empty_name);
                 }
             }
             break;
-	case 'duplicate_file':
+    case 'duplicate_file':
             if($duplicate_files){
                 $name=fix_filename($name);
                 if(!empty($name)){
                     if(!duplicate_file($path,$name))
                         die(lang_Rename_existing_file);
                     duplicate_file($path_thumb,$name);
-		    if($fixed_image_creation){
-			$info=pathinfo($path);
-			foreach($fixed_path_from_filemanager as $k=>$paths){
-			    if($paths!="" && $paths[strlen($paths)-1]!="/") $paths.="/";
-			    $base_dir=$paths.substr_replace($info['dirname']."/", '', 0, strlen($current_path));
-			    if(file_exists($base_dir.$fixed_image_creation_name_to_prepend[$k].$info['filename'].$fixed_image_creation_to_append[$k].".".$info['extension'])){
-				duplicate_file($base_dir.$fixed_image_creation_name_to_prepend[$k].$info['filename'].$fixed_image_creation_to_append[$k].".".$info['extension'],$fixed_image_creation_name_to_prepend[$k].$name.$fixed_image_creation_to_append[$k]);
-			    }
-			}
-		    }
+            if($fixed_image_creation){
+            $info=pathinfo($path);
+            foreach($fixed_path_from_filemanager as $k=>$paths){
+                if($paths!="" && $paths[strlen($paths)-1]!="/") $paths.="/";
+                $base_dir=$paths.substr_replace($info['dirname']."/", '', 0, strlen($current_path));
+                if(file_exists($base_dir.$fixed_image_creation_name_to_prepend[$k].$info['filename'].$fixed_image_creation_to_append[$k].".".$info['extension'])){
+                duplicate_file($base_dir.$fixed_image_creation_name_to_prepend[$k].$info['filename'].$fixed_image_creation_to_append[$k].".".$info['extension'],$fixed_image_creation_name_to_prepend[$k].$name.$fixed_image_creation_to_append[$k]);
+                }
+            }
+            }
                 }else{
                     die(lang_Empty_name);
                 }
@@ -172,7 +171,3 @@ if(isset($_GET['action'])){
     }
     
 }
-
-
-
-?>

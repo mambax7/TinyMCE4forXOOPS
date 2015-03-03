@@ -49,9 +49,6 @@ $current_path = '../../../../../uploads/filemanager/media/'; // relative path fr
 $thumbs_base_path = '../../../../../uploads/filemanager/thumbs/'; // relative path from filemanager folder to thumbs folder (with final /)
 
 
-
-
-
 //------------------------------------------------------------------------------
 // YOU CAN COPY AND CHANGE THESE VARIABLES IN FOLDERS config.php FILES
 //------------------------------------------------------------------------------
@@ -94,7 +91,7 @@ $image_resizing_height=0;
 //******************
 $default_view=0;
 
-//set if the filename is truncated when overflow first row 
+//set if the filename is truncated when overflow first row
 $ellipsis_title_after_first_row=true;
 
 //*************************
@@ -109,32 +106,32 @@ $rename_folders=false;
 $duplicate_files=false;
 
 // XOOPS
-global $xoopsUser; 
+global $xoopsUser;
 // 1 : webmasters
 // 2 : members
 // 3 : anonymous
 // 4 : your new group
 $allowed_groups_upload=array(1); // id des groupes autorisés en upload
 $allowed_groups_createfolder=array(1); // id des groupes autorisés create folder
-if ($xoopsUser) {  
-    $usergroups = $GLOBALS['xoopsUser']->getGroups(); 
-    $result_upload = array_intersect($usergroups, $allowed_groups_upload); 
-        if ($result_upload || $result_upload!=null) { 
-           $upload_files=true; 
-        } 
-  $result_createfolder = array_intersect($usergroups, $allowed_groups_createfolder); 
-       if ($result_createfolder || $result_createfolder!=null) { 
-          $create_folders=true; 
-        } 
+if ($xoopsUser) {
+    $usergroups = $GLOBALS['xoopsUser']->getGroups();
+    $result_upload = array_intersect($usergroups, $allowed_groups_upload);
+        if ($result_upload || $result_upload!=null) {
+           $upload_files=true;
+        }
+  $result_createfolder = array_intersect($usergroups, $allowed_groups_createfolder);
+       if ($result_createfolder || $result_createfolder!=null) {
+          $create_folders=true;
+        }
 }
 // XOOPS
-	
+    
 //**********************
 //Allowed extensions (lowercase insert)
 //**********************
 $ext_img = array('jpg', 'jpeg', 'png', 'gif', 'bmp', 'tiff', 'svg'); //Images
 $ext_file = array('doc', 'docx','rtf', 'pdf', 'xls', 'xlsx', 'txt', 'csv','html','xhtml','psd','sql','log','fla','xml','ade','adp','mdb','accdb','ppt','pptx','odt','ots','ott','odb','odg','otp','otg','odf','ods','odp','css','ai'); //Files
-$ext_video = array('mov', 'mpeg', 'mp4', 'avi', 'mpg','wma',"flv","webm"); //Video 
+$ext_video = array('mov', 'mpeg', 'mp4', 'avi', 'mpg','wma',"flv","webm"); //Video
 $ext_music = array('mp3', 'm4a', 'ac3', 'aiff', 'mid','ogg','wav'); //Audio
 $ext_misc = array('zip', 'rar','gz','tar','iso','dmg'); //Archives
 
@@ -149,7 +146,6 @@ $aviary_key="dvh8qudbp6yx2bnp";
 $aviary_secret="m6xaym5q42rpw433";
 $aviary_version=3;
 $aviary_language='en';
-
 
 //The filter and sorter are managed through both javascript and php scripts because if you have a lot of
 //file in a folder the javascript script can't sort all or filter all, so the filemanager switch to php script.
@@ -169,7 +165,7 @@ $hidden_files = array('index.html');
 //XOOPS
 
 /*******************
- * JAVA upload 
+ * JAVA upload
  *******************/
 $java_upload=true;
 $JAVAMaxSizeUpload=200; //Gb
@@ -181,7 +177,7 @@ $JAVAMaxSizeUpload=200; //Gb
 
 
 // New image resized creation with fixed path from filemanager folder after uploading (thumbnails in fixed mode)
-// If you want create images resized out of upload folder for use with external script you can choose this method, 
+// If you want create images resized out of upload folder for use with external script you can choose this method,
 // You can create also more than one image at a time just simply add a value in the array
 // Remember than the image creation respect the folder hierarchy so if you are inside source/test/test1/ the new image will create at
 // path_from_filemanager/test/test1/
@@ -204,5 +200,4 @@ $relative_image_creation_name_to_prepend= array('','test_'); //name to prepend o
 $relative_image_creation_name_to_append = array('_test',''); //name to append on filename
 $relative_image_creation_width          = array(300,400); //width of image (you can leave empty if you set height)
 $relative_image_creation_height         = array(200,''); //height of image (you can leave empty if you set width)
-
-?>
+;

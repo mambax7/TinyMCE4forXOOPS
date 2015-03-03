@@ -17,8 +17,8 @@ while($cycle && $i<$max_cycles){
     if($path==$current_path)  $cycle=false;
     
     if(file_exists($path."config.php")){
-	require_once($path."config.php");
-	$cycle=false;
+    require_once($path."config.php");
+    $cycle=false;
     }
     $path=fix_dirname($path)."/";
 }
@@ -44,15 +44,14 @@ $path=str_replace(' ','~',$path);
  * @param $file The array wich contains info about all uploaded files.
  */
 function handle_uploaded_files($juploadPhpSupportClass, $files) {
-	return
-		"<P>We are in the 'handle_uploaded_files' callback function, in the index.php script. To avoid double coding, we "
-		. "just call the default behavior of the JUpload PHP class. Just replace this by your code...</P>"
-		. $juploadPhpSupportClass->defaultAfterUploadManagement();
-		;
+    return
+        "<P>We are in the 'handle_uploaded_files' callback function, in the index.php script. To avoid double coding, we "
+        . "just call the default behavior of the JUpload PHP class. Just replace this by your code...</P>"
+        . $juploadPhpSupportClass->defaultAfterUploadManagement();
+        ;
 
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 //First: the applet parameters
@@ -65,17 +64,17 @@ function handle_uploaded_files($juploadPhpSupportClass, $files) {
 // see all details http://jupload.sourceforge.net/howto-customization.html
 //
 $appletParameters = array(
-		//Default value is ... maximum size for a file on the current FS. 2G is problably too much already.
+        //Default value is ... maximum size for a file on the current FS. 2G is problably too much already.
         'maxFileSize' => $JAVAMaxSizeUpload.'G',
         //
         //In the sourceforge project structure, the applet jar file is one folder below. Default
         //configuration is ok, if wjhk.jupload.jar is in the same folder as the script containing this call.
         'archive' => 'wjhk.jupload.jar',
-	'showLogWindow' => 'false',
-	'width' => '100%',
-	'height' =>'358px',
-	'name' => 'No limit Uploader',
-	'allowedFileExtensions' => implode('/',$ext),
+    'showLogWindow' => 'false',
+    'width' => '100%',
+    'height' =>'358px',
+    'name' => 'No limit Uploader',
+    'allowedFileExtensions' => implode('/',$ext),
         //To manage, other jar files, like the ftp jar files if postURL is an FTP URL:
         //'archive' => 'wjhk.jupload.jar,jakarta-commons-oro.jar,jakarta-commons-net.jar',
         //
@@ -91,16 +90,16 @@ $appletParameters = array(
         'debugLevel' => 0 // 100 disables redirect after upload, so we keep it below. This still gives a lot of information, in case of problem.
     );
 
-// for htaccess protected folders 
-if((isset($_SERVER['PHP_AUTH_USER']) && $_SERVER['PHP_AUTH_USER'] != '') && $_SERVER['PHP_AUTH_USER'] != '' && $_SERVER['PHP_AUTH_USER'] != '') 
+// for htaccess protected folders
+if((isset($_SERVER['PHP_AUTH_USER']) && $_SERVER['PHP_AUTH_USER'] != '') && $_SERVER['PHP_AUTH_USER'] != '' && $_SERVER['PHP_AUTH_USER'] != '')
 {
-	$appletParameters['specificHeaders'] = 'Authorization: Basic '.base64_encode($_SERVER['PHP_AUTH_USER'].":".$_SERVER['PHP_AUTH_PW']);
+    $appletParameters['specificHeaders'] = 'Authorization: Basic '.base64_encode($_SERVER['PHP_AUTH_USER'].":".$_SERVER['PHP_AUTH_PW']);
 }
 
 //
 //Then: the jupload PHP class parameters
 $classParameters = array(
-		//Files won't be stored on the server. Useful for first tests of the applet behavior ... and sourceforge demo site !
+        //Files won't be stored on the server. Useful for first tests of the applet behavior ... and sourceforge demo site !
         'demo_mode' => false,
         //
         //Allow creation of subdirectories, when uploading several folders/files (drag and drop a folder on the applet to use it).
@@ -119,7 +118,6 @@ $classParameters = array(
 // Instantiate and initialize JUpload : integration of the applet in your web site.
 $juploadPhpSupportClass = new JUpload($appletParameters, $classParameters);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 //Then, a simple HTML page, for the demo
